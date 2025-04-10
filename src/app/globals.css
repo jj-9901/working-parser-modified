@@ -1,4 +1,4 @@
-@import url("/fonts/fonts.css");
+/**@import url("/fonts/fonts.css");
 @tailwind base;
 @tailwind components;
 @tailwind utilities;
@@ -27,6 +27,50 @@
 :root {
   --theme-purple: #5d52d9;
   --theme-blue: #4fc5eb;
+  Keep the below variable names in sync with CSS_VARIABLES in globals-css.ts
+  --top-nav-bar-height: 3.5rem;
+  --resume-control-bar-height: 3rem;
+  --resume-padding: 1.5rem;
+}**/
+
+
+@import url("/fonts/fonts.css");
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+@layer base {
+  body {
+    @apply text-lg font-mono;
+  }
+}
+
+@layer components {
+  .btn-primary {
+    @apply bg-primary outline-theme-yellow inline-block rounded-l px-8 py-4 font-bold text-xl shadow-2xl m-4 transition-all duration-300;
+  }
+
+  .text-primary {
+    @apply bg-gradient-to-r from-[color:var(--theme-yellow)] to-[color:var(--theme-yellow-light)] bg-clip-text text-transparent !important;
+  }
+
+  .bg-primary {
+    @apply bg-gradient-to-r from-[color:var(--theme-yellow)] to-[color:var(--theme-yellow-light)] text-white;
+  }
+
+  .outline-theme-yellow {
+    @apply hover:opacity-80 hover:outline-[color:var(--theme-yellow)] focus-visible:outline focus-visible:outline-4 focus-visible:outline-offset-4 focus-visible:outline-[color:var(--theme-yellow)];
+  }
+
+  .within-outline-theme-yellow {
+    @apply focus-within:outline focus-within:outline-4 focus-within:outline-offset-4 focus-within:outline-[color:var(--theme-yellow)] hover:opacity-80 hover:outline-[color:var(--theme-yellow)];
+  }
+}
+
+:root {
+  --theme-yellow: #facc15; /* sunflower yellow */
+  --theme-yellow-light: #fde68a; /* soft light yellow */
+  
   /* Keep the below variable names in sync with CSS_VARIABLES in globals-css.ts */
   --top-nav-bar-height: 3.5rem;
   --resume-control-bar-height: 3rem;
