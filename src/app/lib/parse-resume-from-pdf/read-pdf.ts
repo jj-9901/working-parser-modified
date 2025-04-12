@@ -58,8 +58,17 @@ export const readPdf = async (fileUrl: string): Promise<TextItems> => {
       // Use commonObjs to convert font name to original name (e.g. "GVDLYI+Arial-BoldMT")
       // since non system font name by default is a loaded name, e.g. "g_d8_f1"
       // Reference: https://github.com/mozilla/pdf.js/pull/15659
-      const fontObj = commonObjs.get(pdfFontName);
-      const fontName = fontObj.name;
+      // const fontObj = commonObjs.get(pdfFontName);
+      // const fontName = fontObj.name;
+
+      let fontName = pdfFontName;
+if (commonObjs.has(pdfFontName)) {
+  const fontObj = commonObjs.get(pdfFontName);
+  if (fontObj && 'name' in fontObj) {
+    fontName = fontObj.name;
+  }
+}
+
 
       // pdfjs reads a "-" as "-­‐" in the resume example. This is to revert it.
       // Note "-­‐" is "-&#x00AD;‐" with a soft hyphen in between. It is not the same as "--"
