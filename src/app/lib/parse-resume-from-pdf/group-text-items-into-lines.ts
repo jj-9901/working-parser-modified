@@ -58,17 +58,34 @@ export const groupTextItemsIntoLines = (textItems: TextItems): Lines => {
 };
 
 // Sometimes a space is lost while merging adjacent text items. This accounts for some of those cases
+// const shouldAddSpaceBetweenText = (leftText: string, rightText: string) => {
+//   const leftTextEnd = leftText[leftText.length - 1];
+//   const rightTextStart = rightText[0];
+//   const conditions = [
+//     [":", ",", "|", ".", ...BULLET_POINTS].includes(leftTextEnd) &&
+//       rightTextStart !== " ",
+//     leftTextEnd !== " " && ["|", ...BULLET_POINTS].includes(rightTextStart),
+//   ];
+
+//   return conditions.some((condition) => condition);
+// };
+
 const shouldAddSpaceBetweenText = (leftText: string, rightText: string) => {
   const leftTextEnd = leftText[leftText.length - 1];
   const rightTextStart = rightText[0];
+
   const conditions = [
-    [":", ",", "|", ".", ...BULLET_POINTS].includes(leftTextEnd) &&
-      rightTextStart !== " ",
+    [":", ",", "|", ".", ...BULLET_POINTS].includes(leftTextEnd) && rightTextStart !== " ",
     leftTextEnd !== " " && ["|", ...BULLET_POINTS].includes(rightTextStart),
+    // Added condition for generic alphabetic words next to each other
+    /[a-zA-Z]/.test(leftTextEnd) && /[a-zA-Z]/.test(rightTextStart) && rightTextStart !== " ",
   ];
 
   return conditions.some((condition) => condition);
 };
+
+
+
 
 /**
  * Return the width of a typical character. (Helper util for groupTextItemsIntoLines)
