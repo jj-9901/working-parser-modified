@@ -177,15 +177,15 @@ export const ResumeDropzone = ({
             </>
           ) : (
             <>
-              {!playgroundView && (
-                <button
-                  type="button"
-                  className="btn-primary"
-                  onClick={onImportClick}
-                >
-                  Import and Continue <span aria-hidden="true">→</span>
-                </button>
-              )}
+              {/* {!playgroundView && (
+                // <button
+                //   type="button"
+                //   className="btn-primary"
+                //   onClick={onImportClick}
+                // >
+                //   Import and Continue <span aria-hidden="true">→</span>
+                // </button>
+              )} */}
               <p className={cx(" text-gray-500", !playgroundView && "mt-6")}>
                 Note: {!playgroundView ? "Import" : "Parser"} works best on
                 single column resume
