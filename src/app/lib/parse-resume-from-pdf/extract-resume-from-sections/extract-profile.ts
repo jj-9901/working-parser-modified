@@ -24,9 +24,20 @@ const hasAt = (item: TextItem) => item.text.includes("@");
 
 // Phone
 // Simple phone regex that matches (xxx)-xxx-xxxx where () and - are optional, - can also be space
+//  /\(?\d{3}\)?[\s-]?\d{3}[\s-]?\d{4}/
 export const matchPhone = (item: TextItem) =>
-  item.text.match(/\(?\d{3}\)?[\s-]?\d{3}[\s-]?\d{4}/);
+  item.text.match(/\+?\(?\d{1,3}\)?[\s-]?\d{1,4}[\s-]?\d{3}[\s-]?\d{4}/);
 const hasParenthesis = (item: TextItem) => /\([0-9]+\)/.test(item.text);
+
+// export const matchPhone = (item: TextItem) =>
+//   item.text.match(
+//     /^(?:\+?\d{1,3}[ .-]?)?(\(?\d{1,4}\)?[ .-]?\d{1,4}[ .-]?\d{1,4}[ .-]?\d{1,4})$/
+//   );
+
+// export const hasParenthesis = (item: TextItem) =>
+//   /\([0-9]+\)/.test(item.text);
+
+
 
 // Location
 // Simple location regex that matches "<City>, <ST>"
