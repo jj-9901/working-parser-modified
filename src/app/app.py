@@ -4,15 +4,18 @@ from werkzeug.utils import secure_filename
 import os
 
 app = Flask(__name__)
-CORS(app) 
+CORS(app)
 
-UPLOAD_FOLDER = "uploads"
+# For Vercel deployment - use tmp directory for file storage
+UPLOAD_FOLDER = "/tmp/uploads" if os.environ.get("VERCEL") else "uploads"
 app.config["UPLOAD_FOLDER"] = UPLOAD_FOLDER
 os.makedirs(UPLOAD_FOLDER, exist_ok=True)
 
 # Add this function to get the base URL
 def get_base_url():
-    if request.headers.get('X-Forwarded-Host'):
+    if os.environ.get("VERCEL_URL"):
+        return f"https://{os.environ.get('VERCEL_URL')}"
+    elif request.headers.get('X-Forwarded-Host'):
         # Handle proxy/ngrok case
         proto = request.headers.get('X-Forwarded-Proto', 'http')
         host = request.headers.get('X-Forwarded-Host')
